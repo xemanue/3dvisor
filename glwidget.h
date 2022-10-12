@@ -19,21 +19,22 @@
 #include "cube.h"
 #include "cone.h"
 #include "cilinder.h"
+#include "ply_object3d.h"
 
 
-namespace _gl_widget_ne {
+namespace _gl_widget_ne
+{
+const float X_MIN = -.1;
+	const float X_MAX = .1;
+	const float Y_MIN = -.1;
+	const float Y_MAX = .1;
+	const float FRONT_PLANE_PERSPECTIVE = (X_MAX - X_MIN)/2;
+	const float BACK_PLANE_PERSPECTIVE = 1000;
+	const float DEFAULT_DISTANCE = 2;
+	const float ANGLE_STEP = 1;
 
-const float X_MIN=-.1;
-const float X_MAX=.1;
-const float Y_MIN=-.1;
-const float Y_MAX=.1;
-	const float FRONT_PLANE_PERSPECTIVE=(X_MAX-X_MIN)/2;
-	const float BACK_PLANE_PERSPECTIVE=1000;
-	const float DEFAULT_DISTANCE=2;
-	const float ANGLE_STEP=1;
-
-	typedef enum {MODE_DRAW_POINT,MODE_DRAW_LINE,MODE_DRAW_FILL,MODE_DRAW_CHESS} _mode_draw;
-	typedef enum {OBJECT_TETRAHEDRON,OBJECT_CUBE, OBJECT_CONE, OBJECT_CILINDER} _object;
+	typedef enum {MODE_DRAW_POINT, MODE_DRAW_LINE, MODE_DRAW_FILL, MODE_DRAW_CHESS} _mode_draw;
+	typedef enum {OBJECT_TETRAHEDRON, OBJECT_CUBE, OBJECT_CONE, OBJECT_CILINDER, OBJECT_PLY} _object;
 }
 
 class _window;
@@ -74,6 +75,7 @@ private:
 	_cube Cube;
 	_cone Cone;
 	_cilinder Cilinder;
+	_ply_object Ply;
 
 	_gl_widget_ne::_object Object;
 

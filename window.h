@@ -30,13 +30,12 @@ class _gl_widget;
 
 class _window : public QMainWindow
 {
-    Q_OBJECT
-
+Q_OBJECT
 public:
-    _window();
+	_window();
 
 private:
-  _gl_widget *GL_widget;
+	_gl_widget *GL_widget;
 };
 
 #endif

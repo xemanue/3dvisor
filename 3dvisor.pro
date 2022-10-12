@@ -6,6 +6,7 @@ HEADERS += \
   cube.h \
   object3d.h \
   axis.h \
+  ply_object3d.h \
   rev_object3d.h \
   tetrahedron.h \
   glwidget.h \
@@ -18,6 +19,7 @@ SOURCES += \
   cone.cpp \
   cube.cpp \
   object3d.cpp \
+  ply_object.cpp \
   rev_object3d.cpp \
   tetrahedron.cpp \
   main.cpp \
