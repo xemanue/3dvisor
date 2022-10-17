@@ -62,10 +62,30 @@ _window::_window()
 	Combo_tab1->addItem("Elegir...");
 
 	// Checkbox.
-	QCheckBox *Checkbox1_tab1 = new QCheckBox;
-	QCheckBox *Checkbox2_tab1 = new QCheckBox;
-	QCheckBox *Checkbox3_tab1 = new QCheckBox;
-	QCheckBox *Checkbox4_tab1 = new QCheckBox;
+	Checkbox1_tab1 = new QCheckBox;
+	connect(Checkbox1_tab1, SIGNAL(stateChanged(int)), this, SLOT(point_mode_slot()));
+	Checkbox2_tab1 = new QCheckBox;
+	connect(Checkbox2_tab1, SIGNAL(stateChanged(int)), this, SLOT(line_mode_slot()));
+	Checkbox3_tab1 = new QCheckBox;
+	connect(Checkbox3_tab1, SIGNAL(stateChanged(int)), this, SLOT(fill_mode_slot()));
+	Checkbox4_tab1 = new QCheckBox;
+	connect(Checkbox4_tab1, SIGNAL(stateChanged(int)), this, SLOT(chess_mode_slot()));
+
+	// Label points.
+	QLabel *Labelp_tab1 = new QLabel;
+	Labelp_tab1->setText("Puntos");
+
+	// Label lines.
+	QLabel *Labell_tab1 = new QLabel;
+	Labell_tab1->setText("Lineas");
+
+	// Label fill.
+	QLabel *Labelf_tab1 = new QLabel;
+	Labelf_tab1->setText("Relleno");
+
+	// Label chess.
+	QLabel *Labelc_tab1 = new QLabel;
+	Labelc_tab1->setText("Ajedrez");
 
 	// Label para el objeto cargado.
 	QLabel *Labelo_tab1 = new QLabel;
@@ -80,10 +100,10 @@ _window::_window()
 	QHBoxLayout *Horizontal_main = new QHBoxLayout(Central_widget);
 
 	// Layouts para las pestañas.
-	QVBoxLayout *Vertical_tab1 = new QVBoxLayout;
-	QVBoxLayout *Vertical_tab2 = new QVBoxLayout;
-	Vertical_tab1->setAlignment(Qt::AlignTop);
-	Vertical_tab2->setAlignment(Qt::AlignTop);
+	QGridLayout *Grid_tab1 = new QGridLayout;
+	QGridLayout *Grid_tab2 = new QGridLayout;
+	Grid_tab1->setAlignment(Qt::AlignTop | Qt::AlignTop);
+	Grid_tab2->setAlignment(Qt::AlignTop | Qt::AlignTop);
 
 	// Se añade el marco al layout.
 	Horizontal_main->addWidget(Framed_widget);
@@ -93,12 +113,16 @@ _window::_window()
 	Horizontal_frame->addWidget(GL_widget);
 
 	// Se le añaden el dropdown y las checkbox al layout.
-	Vertical_tab1->addWidget(Combo_tab1);
-	Vertical_tab1->addWidget(Labelo_tab1);
-	Vertical_tab1->addWidget(Checkbox1_tab1);
-	Vertical_tab1->addWidget(Checkbox2_tab1);
-	Vertical_tab1->addWidget(Checkbox3_tab1);
-	Vertical_tab1->addWidget(Checkbox4_tab1);
+	Grid_tab1->addWidget(Combo_tab1, 0, 0);
+	Grid_tab1->addWidget(Labelo_tab1, 1, 0);
+	Grid_tab1->addWidget(Labelp_tab1, 2, 0);
+	Grid_tab1->addWidget(Checkbox1_tab1, 2, 1);
+	Grid_tab1->addWidget(Labell_tab1, 3, 0);
+	Grid_tab1->addWidget(Checkbox2_tab1, 3, 1);
+	Grid_tab1->addWidget(Labelf_tab1, 4, 0);
+	Grid_tab1->addWidget(Checkbox3_tab1, 4, 1);
+	Grid_tab1->addWidget(Labelc_tab1, 5, 0);
+	Grid_tab1->addWidget(Checkbox4_tab1, 5, 1);
 
 	// Se le asigna el layout al marco.
 	Framed_widget->setLayout(Horizontal_frame);
@@ -107,8 +131,8 @@ _window::_window()
 	Central_widget->setLayout(Horizontal_main);
 
 	// Se le asignan los layouts a las pestañas.
-	Tab1->setLayout(Vertical_tab1);
-	Tab2->setLayout(Vertical_tab2);
+	Tab1->setLayout(Grid_tab1);
+	Tab2->setLayout(Grid_tab2);
 
 	// Se establece el widget como principal.
 	setCentralWidget(Central_widget);
@@ -130,4 +154,66 @@ _window::_window()
 
 	for (auto widget : findChildren<QWidget*>())
 		if (!qobject_cast<_gl_widget*>(widget)) widget->setFocusPolicy(Qt::NoFocus);
+}
+
+void _window::point_mode_slot()
+{
+	GL_widget->toggle_point_mode();
+}
+
+void _window::line_mode_slot()
+{
+	GL_widget->toggle_line_mode();
+}
+
+void _window::fill_mode_slot()
+{
+	GL_widget->toggle_fill_mode();
+}
+
+void _window::chess_mode_slot()
+{
+	GL_widget->toggle_chess_mode();
+}
+
+void _window::toggled_point_mode(int state)
+{
+	Checkbox1_tab1->blockSignals(true);
+	Checkbox1_tab1->setChecked(state);
+	Checkbox1_tab1->blockSignals(false);
+}
+
+void _window::toggled_line_mode(int state)
+{
+	Checkbox2_tab1->blockSignals(true);
+	Checkbox2_tab1->setChecked(state);
+	Checkbox2_tab1->blockSignals(false);
+}
+
+void _window::toggled_fill_mode(int state)
+{
+	Checkbox3_tab1->blockSignals(true);
+	Checkbox3_tab1->setChecked(state);
+	Checkbox3_tab1->blockSignals(false);
+
+	if (Checkbox4_tab1->isChecked() == true)
+	{
+		Checkbox4_tab1->blockSignals(true);
+		Checkbox4_tab1->setChecked(false);
+		Checkbox4_tab1->blockSignals(false);
+	}
+}
+
+void _window::toggled_chess_mode(int state)
+{
+	Checkbox4_tab1->blockSignals(true);
+	Checkbox4_tab1->setChecked(state);
+	Checkbox4_tab1->blockSignals(false);
+
+	if (Checkbox3_tab1->isChecked() == true)
+	{
+		Checkbox3_tab1->blockSignals(true);
+		Checkbox3_tab1->setChecked(false);
+		Checkbox3_tab1->blockSignals(false);
+	}
 }

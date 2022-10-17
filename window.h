@@ -33,9 +33,23 @@ class _window : public QMainWindow
 Q_OBJECT
 public:
 	_window();
+	void toggled_point_mode(int state);
+	void toggled_line_mode(int state);
+	void toggled_fill_mode(int state);
+	void toggled_chess_mode(int state);
+
+public slots:
+	void point_mode_slot();
+	void line_mode_slot();
+	void fill_mode_slot();
+	void chess_mode_slot();
 
 private:
 	_gl_widget *GL_widget;
+	QCheckBox *Checkbox1_tab1;
+	QCheckBox *Checkbox2_tab1;
+	QCheckBox *Checkbox3_tab1;
+	QCheckBox *Checkbox4_tab1;
 };
 
 #endif

@@ -59,6 +59,11 @@ public:
 	void draw_axis();
 	void draw_objects();
 
+	void toggle_point_mode();
+	void toggle_line_mode();
+	void toggle_fill_mode();
+	void toggle_chess_mode();
+
 protected:
 	void resizeGL(int Width1, int Height1) Q_DECL_OVERRIDE;
 	void paintGL() Q_DECL_OVERRIDE;

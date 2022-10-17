@@ -45,10 +45,10 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 	case Qt::Key_4: Object = OBJECT_CILINDER; break;
 	case Qt::Key_6: Object = OBJECT_PLY; break;
 
-	case Qt::Key_P: Draw_point =! Draw_point; break;
-	case Qt::Key_L: Draw_line =! Draw_line; break;
-	case Qt::Key_F: Draw_fill =! Draw_fill; break;
-	case Qt::Key_C: Draw_chess =! Draw_chess; break;
+	case Qt::Key_P: toggle_point_mode(); Window->toggled_point_mode(Draw_point); break;
+	case Qt::Key_L: toggle_line_mode(); Window->toggled_line_mode(Draw_line); break;
+	case Qt::Key_F: toggle_fill_mode(); Window->toggled_fill_mode(Draw_fill); break;
+	case Qt::Key_C: toggle_chess_mode(); Window->toggled_chess_mode(Draw_chess); break;
 
 	case Qt::Key_Left: Observer_angle_y -= ANGLE_STEP; break;
 	case Qt::Key_Right: Observer_angle_y += ANGLE_STEP; break;
@@ -255,7 +255,7 @@ void _gl_widget::initializeGL()
 	Cone.generate(n_revs);
 	Cilinder.generate(n_revs);
 
-	Ply.open("models/beethoven.ply");
+	Ply.open("models/bunny.ply");
 
 	//------------------------------------------------------------------
 
@@ -270,4 +270,48 @@ void _gl_widget::initializeGL()
 	Draw_line = false;
 	Draw_fill = false;
 	Draw_chess = false;
+}
+
+void _gl_widget::toggle_point_mode()
+{
+	Draw_point = !Draw_point;
+	Window->toggled_point_mode(Draw_point);
+
+	update();
+}
+
+void _gl_widget::toggle_line_mode()
+{
+	Draw_line = !Draw_line;
+	Window->toggled_line_mode(Draw_line);
+
+	update();
+}
+
+void _gl_widget::toggle_fill_mode()
+{
+	Draw_fill = !Draw_fill;
+	Window->toggled_fill_mode(Draw_fill);
+
+	if (Draw_chess)
+	{
+		Draw_chess = !Draw_chess;
+		Window->toggled_chess_mode(Draw_chess);
+	}
+
+	update();
+}
+
+void _gl_widget::toggle_chess_mode()
+{
+	Draw_chess = !Draw_chess;
+	Window->toggled_chess_mode(Draw_chess);
+
+	if (Draw_fill)
+	{
+		Draw_fill = !Draw_fill;
+		Window->toggled_fill_mode(Draw_fill);
+	}
+
+	update();
 }
