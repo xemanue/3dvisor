@@ -19,6 +19,7 @@
 #include "cube.h"
 #include "cone.h"
 #include "cilinder.h"
+#include "sphere.h"
 #include "ply_object3d.h"
 
 
@@ -34,7 +35,7 @@ const float X_MIN = -.1;
 	const float ANGLE_STEP = 1;
 
 	typedef enum {MODE_DRAW_POINT, MODE_DRAW_LINE, MODE_DRAW_FILL, MODE_DRAW_CHESS} _mode_draw;
-	typedef enum {OBJECT_TETRAHEDRON, OBJECT_CUBE, OBJECT_CONE, OBJECT_CILINDER, OBJECT_PLY} _object;
+	typedef enum {OBJECT_TETRAHEDRON, OBJECT_CUBE, OBJECT_CONE, OBJECT_CILINDER, OBJECT_SPHERE, OBJECT_PLY} _object;
 }
 
 class _window;
@@ -73,13 +74,14 @@ protected:
 private:
 	_window *Window;
 
-	int n_revs = 10;
+	int n_revs = 9;
 
 	_axis Axis;
 	_tetrahedron Tetrahedron;
 	_cube Cube;
 	_cone Cone;
 	_cilinder Cilinder;
+	_sphere Sphere;
 	_ply_object Ply;
 
 	_gl_widget_ne::_object Object;

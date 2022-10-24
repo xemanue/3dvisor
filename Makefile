@@ -60,6 +60,7 @@ SOURCES       = axis.cpp \
 		object3d.cpp \
 		ply_object.cpp \
 		rev_object3d.cpp \
+		sphere.cpp \
 		tetrahedron.cpp \
 		main.cpp \
 		glwidget.cpp \
@@ -73,6 +74,7 @@ OBJECTS       = axis.o \
 		object3d.o \
 		ply_object.o \
 		rev_object3d.o \
+		sphere.o \
 		tetrahedron.o \
 		main.o \
 		glwidget.o \
@@ -299,6 +301,7 @@ DIST          = ../../Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
 		axis.h \
 		ply_object3d.h \
 		rev_object3d.h \
+		sphere.h \
 		tetrahedron.h \
 		glwidget.h \
 		window.h axis.cpp \
@@ -309,6 +312,7 @@ DIST          = ../../Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
 		object3d.cpp \
 		ply_object.cpp \
 		rev_object3d.cpp \
+		sphere.cpp \
 		tetrahedron.cpp \
 		main.cpp \
 		glwidget.cpp \
@@ -764,8 +768,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.15.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents cilinder.h colors.h basic_object3d.h cone.h cube.h object3d.h axis.h ply_object3d.h rev_object3d.h tetrahedron.h glwidget.h window.h $(DISTDIR)/
-	$(COPY_FILE) --parents axis.cpp basic_object3d.cpp cilinder.cpp cone.cpp cube.cpp object3d.cpp ply_object.cpp rev_object3d.cpp tetrahedron.cpp main.cpp glwidget.cpp window.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents cilinder.h colors.h basic_object3d.h cone.h cube.h object3d.h axis.h ply_object3d.h rev_object3d.h sphere.h tetrahedron.h glwidget.h window.h $(DISTDIR)/
+	$(COPY_FILE) --parents axis.cpp basic_object3d.cpp cilinder.cpp cone.cpp cube.cpp object3d.cpp ply_object.cpp rev_object3d.cpp sphere.cpp tetrahedron.cpp main.cpp glwidget.cpp window.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1128,6 +1132,14 @@ rev_object3d.o: rev_object3d.cpp rev_object3d.h \
 		colors.h \
 		vertex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rev_object3d.o rev_object3d.cpp
+
+sphere.o: sphere.cpp sphere.h \
+		rev_object3d.h \
+		object3d.h \
+		basic_object3d.h \
+		colors.h \
+		vertex.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sphere.o sphere.cpp
 
 tetrahedron.o: tetrahedron.cpp tetrahedron.h \
 		object3d.h \
