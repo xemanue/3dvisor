@@ -46,10 +46,10 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 	case Qt::Key_5: Object = OBJECT_SPHERE; Window->changed_object(4); break;
 	case Qt::Key_6: Object = OBJECT_PLY; break;
 
-	case Qt::Key_P: toggle_point_mode(); Window->toggled_point_mode(Draw_point); break;
-	case Qt::Key_L: toggle_line_mode(); Window->toggled_line_mode(Draw_line); break;
-	case Qt::Key_F: toggle_fill_mode(); Window->toggled_fill_mode(Draw_fill); break;
-	case Qt::Key_C: toggle_chess_mode(); Window->toggled_chess_mode(Draw_chess); break;
+	case Qt::Key_P: toggle_point_mode(Draw_point ? Qt::Checked : Qt::Unchecked); Window->toggled_point_mode(Draw_point); break;
+	case Qt::Key_L: toggle_line_mode(Draw_line ? Qt::Checked : Qt::Unchecked); Window->toggled_line_mode(Draw_line); break;
+	case Qt::Key_F: toggle_fill_mode(Draw_fill ? Qt::Checked : Qt::Unchecked); Window->toggled_fill_mode(Draw_fill); break;
+	case Qt::Key_C: toggle_chess_mode(Draw_chess ? Qt::Checked : Qt::Unchecked); Window->toggled_chess_mode(Draw_chess); break;
 
 	case Qt::Key_Left: Observer_angle_y -= ANGLE_STEP; break;
 	case Qt::Key_Right: Observer_angle_y += ANGLE_STEP; break;
@@ -276,26 +276,26 @@ void _gl_widget::initializeGL()
 	Draw_chess = false;
 }
 
-void _gl_widget::toggle_point_mode()
+void _gl_widget::toggle_point_mode(int state)
 {
 	Draw_point = !Draw_point;
-	Window->toggled_point_mode(Draw_point);
+	Window->toggled_point_mode(state);
 
 	update();
 }
 
-void _gl_widget::toggle_line_mode()
+void _gl_widget::toggle_line_mode(int state)
 {
 	Draw_line = !Draw_line;
-	Window->toggled_line_mode(Draw_line);
+	Window->toggled_line_mode(state);
 
 	update();
 }
 
-void _gl_widget::toggle_fill_mode()
+void _gl_widget::toggle_fill_mode(int state)
 {
 	Draw_fill = !Draw_fill;
-	Window->toggled_fill_mode(Draw_fill);
+	Window->toggled_fill_mode(state);
 
 	if (Draw_chess)
 	{
@@ -306,10 +306,10 @@ void _gl_widget::toggle_fill_mode()
 	update();
 }
 
-void _gl_widget::toggle_chess_mode()
+void _gl_widget::toggle_chess_mode(int state)
 {
 	Draw_chess = !Draw_chess;
-	Window->toggled_chess_mode(Draw_chess);
+	Window->toggled_chess_mode(state);
 
 	if (Draw_fill)
 	{
@@ -347,4 +347,9 @@ void _gl_widget::change_object_to_ply(QString archivo)
 	file_loaded = true;
 
 	draw_objects();
+}
+
+void _gl_widget::unload_ply()
+{
+	Ply.close();
 }

@@ -45,11 +45,12 @@ public:
 	void changed_object(int index);
 
 public slots:
-	void point_mode_slot();
-	void line_mode_slot();
-	void fill_mode_slot();
-	void chess_mode_slot();
+	void point_mode_slot(int state);
+	void line_mode_slot(int state);
+	void fill_mode_slot(int state);
+	void chess_mode_slot(int state);
 	void object_changed_slot(int index);
+	void unload_clicked();
 
 private:
 	_gl_widget *GL_widget;

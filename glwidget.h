@@ -60,13 +60,15 @@ public:
 	void draw_axis();
 	void draw_objects();
 
-	void toggle_point_mode();
-	void toggle_line_mode();
-	void toggle_fill_mode();
-	void toggle_chess_mode();
+	void toggle_point_mode(int state);
+	void toggle_line_mode(int state);
+	void toggle_fill_mode(int state);
+	void toggle_chess_mode(int state);
 
 	void change_object(int index);
 	void change_object_to_ply(QString archivo);
+
+	void unload_ply();
 
 protected:
 	void resizeGL(int Width1, int Height1) Q_DECL_OVERRIDE;

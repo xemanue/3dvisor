@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata__window_t {
-    QByteArrayData data[8];
-    char stringdata0[97];
+    QByteArrayData data[10];
+    char stringdata0[118];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,16 +35,19 @@ static const qt_meta_stringdata__window_t qt_meta_stringdata__window = {
 QT_MOC_LITERAL(0, 0, 7), // "_window"
 QT_MOC_LITERAL(1, 8, 15), // "point_mode_slot"
 QT_MOC_LITERAL(2, 24, 0), // ""
-QT_MOC_LITERAL(3, 25, 14), // "line_mode_slot"
-QT_MOC_LITERAL(4, 40, 14), // "fill_mode_slot"
-QT_MOC_LITERAL(5, 55, 15), // "chess_mode_slot"
-QT_MOC_LITERAL(6, 71, 19), // "object_changed_slot"
-QT_MOC_LITERAL(7, 91, 5) // "index"
+QT_MOC_LITERAL(3, 25, 5), // "state"
+QT_MOC_LITERAL(4, 31, 14), // "line_mode_slot"
+QT_MOC_LITERAL(5, 46, 14), // "fill_mode_slot"
+QT_MOC_LITERAL(6, 61, 15), // "chess_mode_slot"
+QT_MOC_LITERAL(7, 77, 19), // "object_changed_slot"
+QT_MOC_LITERAL(8, 97, 5), // "index"
+QT_MOC_LITERAL(9, 103, 14) // "unload_clicked"
 
     },
-    "_window\0point_mode_slot\0\0line_mode_slot\0"
-    "fill_mode_slot\0chess_mode_slot\0"
-    "object_changed_slot\0index"
+    "_window\0point_mode_slot\0\0state\0"
+    "line_mode_slot\0fill_mode_slot\0"
+    "chess_mode_slot\0object_changed_slot\0"
+    "index\0unload_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,7 +57,7 @@ static const uint qt_meta_data__window[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -62,18 +65,20 @@ static const uint qt_meta_data__window[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   39,    2, 0x0a /* Public */,
-       3,    0,   40,    2, 0x0a /* Public */,
-       4,    0,   41,    2, 0x0a /* Public */,
-       5,    0,   42,    2, 0x0a /* Public */,
-       6,    1,   43,    2, 0x0a /* Public */,
+       1,    1,   44,    2, 0x0a /* Public */,
+       4,    1,   47,    2, 0x0a /* Public */,
+       5,    1,   50,    2, 0x0a /* Public */,
+       6,    1,   53,    2, 0x0a /* Public */,
+       7,    1,   56,    2, 0x0a /* Public */,
+       9,    0,   59,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::Int,    3,
+    QMetaType::Void, QMetaType::Int,    3,
+    QMetaType::Void, QMetaType::Int,    3,
+    QMetaType::Void, QMetaType::Int,    3,
+    QMetaType::Void, QMetaType::Int,    8,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    7,
 
        0        // eod
 };
@@ -84,11 +89,12 @@ void _window::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         auto *_t = static_cast<_window *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->point_mode_slot(); break;
-        case 1: _t->line_mode_slot(); break;
-        case 2: _t->fill_mode_slot(); break;
-        case 3: _t->chess_mode_slot(); break;
+        case 0: _t->point_mode_slot((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: _t->line_mode_slot((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->fill_mode_slot((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->chess_mode_slot((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->object_changed_slot((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->unload_clicked(); break;
         default: ;
         }
     }
@@ -123,13 +129,13 @@ int _window::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

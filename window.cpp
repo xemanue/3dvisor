@@ -67,17 +67,18 @@ _window::_window()
 
 	// Boton para descargar objeto.
 	Boton_tab1 = new QPushButton("Descargar objeto", this);
+	connect(Boton_tab1, SIGNAL(clicked()), this, SLOT(unload_clicked()));
 	Boton_tab1->setEnabled(false);
 
 	// Checkbox.
 	Checkbox1_tab1 = new QCheckBox;
-	connect(Checkbox1_tab1, SIGNAL(stateChanged(int)), this, SLOT(point_mode_slot()));
+	connect(Checkbox1_tab1, SIGNAL(stateChanged(int)), this, SLOT(point_mode_slot(int)));
 	Checkbox2_tab1 = new QCheckBox;
-	connect(Checkbox2_tab1, SIGNAL(stateChanged(int)), this, SLOT(line_mode_slot()));
+	connect(Checkbox2_tab1, SIGNAL(stateChanged(int)), this, SLOT(line_mode_slot(int)));
 	Checkbox3_tab1 = new QCheckBox;
-	connect(Checkbox3_tab1, SIGNAL(stateChanged(int)), this, SLOT(fill_mode_slot()));
+	connect(Checkbox3_tab1, SIGNAL(stateChanged(int)), this, SLOT(fill_mode_slot(int)));
 	Checkbox4_tab1 = new QCheckBox;
-	connect(Checkbox4_tab1, SIGNAL(stateChanged(int)), this, SLOT(chess_mode_slot()));
+	connect(Checkbox4_tab1, SIGNAL(stateChanged(int)), this, SLOT(chess_mode_slot(int)));
 
 	// Label points.
 	QLabel *Labelp_tab1 = new QLabel;
@@ -160,24 +161,24 @@ _window::_window()
 		if (!qobject_cast<_gl_widget*>(widget)) widget->setFocusPolicy(Qt::NoFocus);
 }
 
-void _window::point_mode_slot()
+void _window::point_mode_slot(int state)
 {
-	GL_widget->toggle_point_mode();
+	GL_widget->toggle_point_mode(state);
 }
 
-void _window::line_mode_slot()
+void _window::line_mode_slot(int state)
 {
-	GL_widget->toggle_line_mode();
+	GL_widget->toggle_line_mode(state);
 }
 
-void _window::fill_mode_slot()
+void _window::fill_mode_slot(int state)
 {
-	GL_widget->toggle_fill_mode();
+	GL_widget->toggle_fill_mode(state);
 }
 
-void _window::chess_mode_slot()
+void _window::chess_mode_slot(int state)
 {
-	GL_widget->toggle_chess_mode();
+	GL_widget->toggle_chess_mode(state);
 }
 
 void _window::object_changed_slot(int index)
@@ -200,6 +201,16 @@ void _window::object_changed_slot(int index)
 	{
 		GL_widget->change_object(index);
 	}
+}
+
+void _window::unload_clicked()
+{
+	GL_widget->unload_ply();
+
+	Boton_tab1->setEnabled(false);
+
+	Labelo_tab1->setText("Ningún objeto cargado.");
+	Labelo_tab1->setStyleSheet(QStringLiteral("QLabel{color: #CC6666}"));
 }
 
 void _window::toggled_point_mode(int state)
@@ -225,7 +236,7 @@ void _window::toggled_fill_mode(int state)
 	if (Checkbox4_tab1->isChecked() == true)
 	{
 		Checkbox4_tab1->blockSignals(true);
-		Checkbox4_tab1->setChecked(false);
+		Checkbox4_tab1->setChecked(!state);
 		Checkbox4_tab1->blockSignals(false);
 	}
 }
@@ -239,7 +250,7 @@ void _window::toggled_chess_mode(int state)
 	if (Checkbox3_tab1->isChecked() == true)
 	{
 		Checkbox3_tab1->blockSignals(true);
-		Checkbox3_tab1->setChecked(false);
+		Checkbox3_tab1->setChecked(!state);
 		Checkbox3_tab1->blockSignals(false);
 	}
 }
