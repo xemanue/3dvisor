@@ -17,6 +17,11 @@
 #include <QHBoxLayout>
 #include <QMessageBox>
 #include <QGuiApplication>
+#include <QComboBox>
+#include <QPushButton>
+#include <QCheckBox>
+#include <QFileDialog>
+#include <QFileInfo>
 
 
 class _gl_widget;
@@ -37,19 +42,29 @@ public:
 	void toggled_line_mode(int state);
 	void toggled_fill_mode(int state);
 	void toggled_chess_mode(int state);
+	void changed_object(int index);
 
 public slots:
 	void point_mode_slot();
 	void line_mode_slot();
 	void fill_mode_slot();
 	void chess_mode_slot();
+	void object_changed_slot(int index);
 
 private:
 	_gl_widget *GL_widget;
+
+	QComboBox *Combo_tab1;
+
+	QLabel *Labelo_tab1;
+
+	QPushButton *Boton_tab1;
+
 	QCheckBox *Checkbox1_tab1;
 	QCheckBox *Checkbox2_tab1;
 	QCheckBox *Checkbox3_tab1;
 	QCheckBox *Checkbox4_tab1;
+
 };
 
 #endif

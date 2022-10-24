@@ -39,11 +39,11 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 {
 	switch (Keyevent->key())
 	{
-	case Qt::Key_1: Object = OBJECT_TETRAHEDRON; break;
-	case Qt::Key_2: Object = OBJECT_CUBE; break;
-	case Qt::Key_3: Object = OBJECT_CONE; break;
-	case Qt::Key_4: Object = OBJECT_CILINDER; break;
-	case Qt::Key_5: Object = OBJECT_SPHERE; break;
+	case Qt::Key_1: Object = OBJECT_TETRAHEDRON; Window->changed_object(0); break;
+	case Qt::Key_2: Object = OBJECT_CUBE; Window->changed_object(1); break;
+	case Qt::Key_3: Object = OBJECT_CONE; Window->changed_object(2); break;
+	case Qt::Key_4: Object = OBJECT_CILINDER; Window->changed_object(3); break;
+	case Qt::Key_5: Object = OBJECT_SPHERE; Window->changed_object(4); break;
 	case Qt::Key_6: Object = OBJECT_PLY; break;
 
 	case Qt::Key_P: toggle_point_mode(); Window->toggled_point_mode(Draw_point); break;
@@ -261,8 +261,6 @@ void _gl_widget::initializeGL()
 	Cilinder.generate(n_revs);
 	Sphere.generate(n_revs);
 
-	Ply.open("models/bunny.ply");
-
 	//------------------------------------------------------------------
 
 	glClearColor(1.0, 1.0, 1.0, 1.0);
@@ -320,4 +318,33 @@ void _gl_widget::toggle_chess_mode()
 	}
 
 	update();
+}
+
+void _gl_widget::change_object(int index)
+{
+	switch(index)
+	{
+	case 0: Object = OBJECT_TETRAHEDRON; break;
+	case 1: Object = OBJECT_CUBE; break;
+	case 2: Object = OBJECT_CONE; break;
+	case 3: Object = OBJECT_CILINDER; break;
+	case 4: Object = OBJECT_SPHERE; break;
+	}
+
+	draw_objects();
+}
+
+void _gl_widget::change_object_to_ply(QString archivo)
+{
+	Object = OBJECT_PLY;
+
+	if (file_loaded)
+	{
+		Ply.close();
+	}
+
+	Ply.open(archivo.toStdString());
+	file_loaded = true;
+
+	draw_objects();
 }

@@ -65,6 +65,9 @@ public:
 	void toggle_fill_mode();
 	void toggle_chess_mode();
 
+	void change_object(int index);
+	void change_object_to_ply(QString archivo);
+
 protected:
 	void resizeGL(int Width1, int Height1) Q_DECL_OVERRIDE;
 	void paintGL() Q_DECL_OVERRIDE;
@@ -83,6 +86,8 @@ private:
 	_cilinder Cilinder;
 	_sphere Sphere;
 	_ply_object Ply;
+
+	bool file_loaded = false;
 
 	_gl_widget_ne::_object Object;
 

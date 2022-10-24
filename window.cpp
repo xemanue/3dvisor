@@ -11,8 +11,6 @@
 #include <QAction>
 #include <QMenuBar>
 #include <QFrame>
-#include <QComboBox>
-#include <QCheckBox>
 #include <QLabel>
 
 #include "window.h"
@@ -48,18 +46,28 @@ _window::_window()
 
 	// Widget de pestañas.
 	QTabWidget *Tab_widget = new QTabWidget;
-	Tab_widget->setMaximumWidth(200);
+	Tab_widget->setMaximumWidth(250);
 	Tab_widget->addTab(Tab1, "Objeto");
 	Tab_widget->addTab(Tab2, "Navegación");
 
 	// Dropdown menu.
-	QComboBox *Combo_tab1 = new QComboBox;
+	Combo_tab1 = new QComboBox;
+	connect(Combo_tab1, SIGNAL(currentIndexChanged(int)), this, SLOT(object_changed_slot(int)));
 	Combo_tab1->addItem("Tetrahedro");
 	Combo_tab1->addItem("Cubo");
 	Combo_tab1->addItem("Cono");
 	Combo_tab1->addItem("Cilindro");
 	Combo_tab1->addItem("Esfera");
 	Combo_tab1->addItem("Elegir...");
+
+	// Label para el objeto cargado.
+	Labelo_tab1 = new QLabel;
+	Labelo_tab1->setText("Ningún objeto cargado.");
+	Labelo_tab1->setStyleSheet(QStringLiteral("QLabel{color: #CC6666}"));
+
+	// Boton para descargar objeto.
+	Boton_tab1 = new QPushButton("Descargar objeto", this);
+	Boton_tab1->setEnabled(false);
 
 	// Checkbox.
 	Checkbox1_tab1 = new QCheckBox;
@@ -87,11 +95,6 @@ _window::_window()
 	QLabel *Labelc_tab1 = new QLabel;
 	Labelc_tab1->setText("Ajedrez");
 
-	// Label para el objeto cargado.
-	QLabel *Labelo_tab1 = new QLabel;
-	Labelo_tab1->setText("Ningún objeto cargado.");
-	Labelo_tab1->setStyleSheet(QStringLiteral("QLabel{color: #CC6666}"));
-
 	// Layout horizontal.
 	QHBoxLayout *Horizontal_frame = new QHBoxLayout;
 	Horizontal_frame->setContentsMargins(1, 1, 1, 1);
@@ -115,14 +118,15 @@ _window::_window()
 	// Se le añaden el dropdown y las checkbox al layout.
 	Grid_tab1->addWidget(Combo_tab1, 0, 0);
 	Grid_tab1->addWidget(Labelo_tab1, 1, 0);
-	Grid_tab1->addWidget(Labelp_tab1, 2, 0);
-	Grid_tab1->addWidget(Checkbox1_tab1, 2, 1);
-	Grid_tab1->addWidget(Labell_tab1, 3, 0);
-	Grid_tab1->addWidget(Checkbox2_tab1, 3, 1);
-	Grid_tab1->addWidget(Labelf_tab1, 4, 0);
-	Grid_tab1->addWidget(Checkbox3_tab1, 4, 1);
-	Grid_tab1->addWidget(Labelc_tab1, 5, 0);
-	Grid_tab1->addWidget(Checkbox4_tab1, 5, 1);
+	Grid_tab1->addWidget(Boton_tab1, 2, 0);
+	Grid_tab1->addWidget(Labelp_tab1, 3, 0);
+	Grid_tab1->addWidget(Checkbox1_tab1, 3, 1);
+	Grid_tab1->addWidget(Labell_tab1, 4, 0);
+	Grid_tab1->addWidget(Checkbox2_tab1, 4, 1);
+	Grid_tab1->addWidget(Labelf_tab1, 5, 0);
+	Grid_tab1->addWidget(Checkbox3_tab1, 5, 1);
+	Grid_tab1->addWidget(Labelc_tab1, 6, 0);
+	Grid_tab1->addWidget(Checkbox4_tab1, 6, 1);
 
 	// Se le asigna el layout al marco.
 	Framed_widget->setLayout(Horizontal_frame);
@@ -150,7 +154,7 @@ _window::_window()
 
 	setWindowTitle(tr("Práctica 1"));
 
-	resize(1000,800);
+	resize(1050,800);
 
 	for (auto widget : findChildren<QWidget*>())
 		if (!qobject_cast<_gl_widget*>(widget)) widget->setFocusPolicy(Qt::NoFocus);
@@ -174,6 +178,28 @@ void _window::fill_mode_slot()
 void _window::chess_mode_slot()
 {
 	GL_widget->toggle_chess_mode();
+}
+
+void _window::object_changed_slot(int index)
+{
+	if (index == 5)
+	{
+		QString archivo_path = QFileDialog::getOpenFileName(this, "Elige el archivo...", "./models", "*.ply");
+		QFileInfo *info = new QFileInfo(archivo_path);
+		QString archivo_name = info->fileName();
+
+		Boton_tab1->setEnabled(true);
+
+		Labelo_tab1->setText("Cargado " + archivo_name);
+		Labelo_tab1->setStyleSheet(QStringLiteral("QLabel{color: #33CC66}"));
+
+		GL_widget->change_object_to_ply(archivo_path);
+	}
+
+	else
+	{
+		GL_widget->change_object(index);
+	}
 }
 
 void _window::toggled_point_mode(int state)
@@ -216,4 +242,11 @@ void _window::toggled_chess_mode(int state)
 		Checkbox3_tab1->setChecked(false);
 		Checkbox3_tab1->blockSignals(false);
 	}
+}
+
+void _window::changed_object(int index)
+{
+	Combo_tab1->blockSignals(true);
+	Combo_tab1->setCurrentIndex(index);
+	Combo_tab1->blockSignals(false);
 }
