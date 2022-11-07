@@ -79,7 +79,7 @@ protected:
 private:
 	_window *Window;
 
-	int n_revs = 4;
+	int n_revs = 9;
 
 	_axis Axis;
 	_tetrahedron Tetrahedron;

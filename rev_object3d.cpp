@@ -24,7 +24,18 @@ void _rev_object::generate(unsigned int n)
 			Vertices[k++] = _vertex3f(x, y, z);
 		}
 	}
-	
+
+	/*
+	Triangles.push_back(_vertex3ui(1, 5, 2));
+	Triangles.push_back(_vertex3ui(2, 5, 6));
+	Triangles.push_back(_vertex3ui(5, 9, 6));
+	Triangles.push_back(_vertex3ui(6, 9, 10));
+	Triangles.push_back(_vertex3ui(9, 13, 10));
+	Triangles.push_back(_vertex3ui(10, 13, 14));
+	*/
+
+
+
 	Triangles.resize((n*(generators.size()-1))*2);
 	k = 0;
 	
@@ -32,8 +43,9 @@ void _rev_object::generate(unsigned int n)
 	{
 		for (unsigned int i = 0; i < generators.size() - 1; i++)
 		{
-			Triangles[k++] = _vertex3ui((i+j*n), (n+i+j*n)%n*generators.size(), (1+i+j*n));
-			Triangles[k++] = _vertex3ui((1+i+j*n), (n+i+j*n)%n*generators.size(), (n+1+i+j*n)%n*generators.size());
+			Triangles[k++] = _vertex3ui((i+j*generators.size()), (i+(j+1)*generators.size())%(n*generators.size()), i+1+j*generators.size());
+			Triangles[k++] = _vertex3ui((i+(j+1)*generators.size())%(n*generators.size()), (i+1+(j+1)*generators.size())%(n*generators.size()), i+1+j*generators.size());
 		}
 	}
+
 }
