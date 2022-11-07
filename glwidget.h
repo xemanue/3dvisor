@@ -79,7 +79,7 @@ protected:
 private:
 	_window *Window;
 
-	int n_revs = 9;
+	int n_revs = 4;
 
 	_axis Axis;
 	_tetrahedron Tetrahedron;
@@ -93,10 +93,10 @@ private:
 
 	_gl_widget_ne::_object Object;
 
-	bool Draw_point;
-	bool Draw_line;
-	bool Draw_fill;
-	bool Draw_chess;
+	bool Draw_point = false;
+	bool Draw_line = false;
+	bool Draw_fill = false;
+	bool Draw_chess = false;
 
 	float Observer_angle_x;
 	float Observer_angle_y;
