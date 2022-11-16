@@ -10,7 +10,7 @@
 _sphere::_sphere(float Size, unsigned int res)
 {
 	// Puntos generatriz.
-	generators.resize(res);
+	perfil.resize(res);
 	int k = 0;
 
 	for (float i = 0; i < M_PI; i += M_PI/res)
@@ -19,6 +19,6 @@ _sphere::_sphere(float Size, unsigned int res)
 		float y = Size/2*cos(i) * sin(i) + Size/2*sin(i) * cos(i);
 		float z = 0;
 
-		generators[k++] = _vertex3f(x, y, z);
+		perfil[k++] = _vertex3f(x, y, z);
 	}
 }

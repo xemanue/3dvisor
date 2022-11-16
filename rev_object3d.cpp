@@ -10,42 +10,76 @@
 
 void _rev_object::generate(unsigned int n)
 {
-	Vertices.resize(n*generators.size());
+	// Se guardan los puntos de las tapas en un vector aparte
+
+	unsigned int i = 0;
+
+	while (i < perfil.size())
+	{
+		if (perfil[i]._0 == 0 && perfil[i]._2 == 0)
+		{
+			tapas.push_back(perfil[i]);
+			perfil.erase(perfil.begin() + i);
+		}
+
+		else
+		{
+			i++;
+		}
+	}
+
+	// Solo permitimos objetos con una o dos tapas
+
+	if (tapas.size() > 2)
+	{
+		cerr << "ERROR: Los objetos con más de dos tapas no son compatibles." << endl;
+		exit(1);
+	}
+
+	// Generamos los vertices por revolucion y añadimos los de las tapas al final
+
+	Vertices.resize(n*perfil.size() + tapas.size());
 	int k = 0;
 
-	for (float i = 0; i < 2*M_PI; i += 2*M_PI/n)
+	for (i = 0; i < n; i++)
 	{
-		for (unsigned long j = 0; j < generators.size(); j++)
+		for (unsigned long j = 0; j < perfil.size(); j++)
 		{
-			float x = generators[j].x * cos(i) + generators[j].z * sin(i);
-			float y = generators[j].y;
-			float z = -generators[j].x * sin(i) + generators[j].z * cos(i);
+			float x = perfil[j].x * cos(i*2*M_PI/n) + perfil[j].z * sin(i*2*M_PI/n);
+			float y = perfil[j].y;
+			float z = -perfil[j].x * sin(i*2*M_PI/n) + perfil[j].z * cos(i*2*M_PI/n);
 
 			Vertices[k++] = _vertex3f(x, y, z);
 		}
 	}
 
-	/*
-	Triangles.push_back(_vertex3ui(1, 5, 2));
-	Triangles.push_back(_vertex3ui(2, 5, 6));
-	Triangles.push_back(_vertex3ui(5, 9, 6));
-	Triangles.push_back(_vertex3ui(6, 9, 10));
-	Triangles.push_back(_vertex3ui(9, 13, 10));
-	Triangles.push_back(_vertex3ui(10, 13, 14));
-	*/
+	for (unsigned int i = 0; i < tapas.size(); i++)
+	{
+		Vertices[k++] = tapas[i];
+	}
 
+	// Generamos los triangulos
 
-
-	Triangles.resize((n*(generators.size()-1))*2);
+	Triangles.resize(100);
 	k = 0;
 	
 	for (unsigned int j = 0; j < n; j++)
 	{
-		for (unsigned int i = 0; i < generators.size() - 1; i++)
+		for (unsigned int i = 0; i < perfil.size() - 1; i++)
 		{
-			Triangles[k++] = _vertex3ui((i+j*generators.size()), (i+(j+1)*generators.size())%(n*generators.size()), i+1+j*generators.size());
-			Triangles[k++] = _vertex3ui((i+(j+1)*generators.size())%(n*generators.size()), (i+1+(j+1)*generators.size())%(n*generators.size()), i+1+j*generators.size());
+			Triangles[k++] = _vertex3ui(i+perfil.size()*j, (i+perfil.size()*(j+1))%(n*perfil.size()), (i+j*perfil.size())+1);
+			Triangles[k++] = _vertex3ui(i+perfil.size()*j+1, (i+perfil.size()*(j+1))%(n*perfil.size()), (i+perfil.size()*(j+1)+1)%(n*perfil.size()));
+		}
+
+		if (tapas.size() == 1)
+		{
+			Triangles[k++] = _vertex3ui(Vertices.size() - 1, ((j+1)*perfil.size())%(n*perfil.size()), j*perfil.size());
+		}
+
+		else if (tapas.size() == 2)
+		{
+			Triangles[k++] = _vertex3ui(Vertices.size() - 2, ((j+1)*perfil.size())%(n*perfil.size()), j*perfil.size());
+			Triangles[k++] = _vertex3ui(Vertices.size() - 1, (j+1)*perfil.size()-1, ((j+2)*perfil.size()-1)%(n*perfil.size()));
 		}
 	}
-
 }
