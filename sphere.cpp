@@ -13,12 +13,21 @@ _sphere::_sphere(float Size, unsigned int res)
 	perfil.resize(res);
 	int k = 0;
 
-	for (float i = 0; i < M_PI; i += M_PI/res)
+	for (unsigned int i = 0; i < res; i++)
 	{
-		float x = Size/2*cos(i) * cos(i) - Size/2*sin(i) * sin(i);
-		float y = Size/2*cos(i) * sin(i) + Size/2*sin(i) * cos(i);
+		float x = Size/2*cos(i*M_PI/res);
+		float y = Size/2*sin(i*M_PI/res);
 		float z = 0;
 
 		perfil[k++] = _vertex3f(x, y, z);
+	}
+
+	k = 0;
+
+	Vertices.resize(res);
+
+	for (unsigned int i = 0; i < perfil.size(); i++)
+	{
+		Vertices[k++] = perfil[i];
 	}
 }

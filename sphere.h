@@ -13,7 +13,7 @@
 class _sphere:public _rev_object
 {
 public:
-	_sphere(float Size = 1.0, unsigned int res = 9);
+	_sphere(float Size = 1.0, unsigned int res = 16);
 };
 
 #endif // SPHERE_H

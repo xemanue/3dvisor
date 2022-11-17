@@ -1,2 +1,5 @@
-# Ignora el .pro.user de los webo
+# .pro.user
 *.user*
+
+# .o
+*.o

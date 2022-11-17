@@ -258,7 +258,7 @@ void _gl_widget::initializeGL()
 	// Inicializacion de objetos
 
 	//Cone.generate(n_revs);
-	Cilinder.generate(n_revs);
+	//Cilinder.generate(n_revs);
 	//Sphere.generate(n_revs);
 
 	//------------------------------------------------------------------

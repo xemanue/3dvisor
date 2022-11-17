@@ -41,7 +41,7 @@ void _rev_object::generate(unsigned int n)
 	Vertices.resize(n*perfil.size() + tapas.size());
 	int k = 0;
 
-	for (i = 0; i < n; i++)
+	for (unsigned int i = 0; i < n; i++)
 	{
 		for (unsigned long j = 0; j < perfil.size(); j++)
 		{
@@ -60,7 +60,7 @@ void _rev_object::generate(unsigned int n)
 
 	// Generamos los triangulos
 
-	Triangles.resize(100);
+	Triangles.resize(2*n*(perfil.size()-1) + n*tapas.size());
 	k = 0;
 	
 	for (unsigned int j = 0; j < n; j++)
