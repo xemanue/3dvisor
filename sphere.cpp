@@ -7,27 +7,20 @@
  *
  *****************************************************************************/
 
-_sphere::_sphere(float Size, unsigned int res)
+_sphere::_sphere(float Size, unsigned int n_pts)
 {
 	// Puntos generatriz.
-	perfil.resize(res);
+	perfil.resize(n_pts + 1);
 	int k = 0;
 
-	for (unsigned int i = 0; i < res; i++)
+	_vertex3f punto = {0, -Size/2, 0};
+
+	for (unsigned int i = 0; i <= n_pts; i++)
 	{
-		float x = Size/2*cos(i*M_PI/res);
-		float y = Size/2*sin(i*M_PI/res);
-		float z = 0;
+		float x = punto.x * cos(i*M_PI/n_pts) - punto.y * sin(i*M_PI/n_pts);
+		float y = punto.x * sin(i*M_PI/n_pts) + punto.y * cos(i*M_PI/n_pts);
+		float z = punto.z;
 
 		perfil[k++] = _vertex3f(x, y, z);
-	}
-
-	k = 0;
-
-	Vertices.resize(res);
-
-	for (unsigned int i = 0; i < perfil.size(); i++)
-	{
-		Vertices[k++] = perfil[i];
 	}
 }
