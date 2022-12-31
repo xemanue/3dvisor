@@ -45,6 +45,7 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 	case Qt::Key_4: Object = OBJECT_CILINDER; Window->changed_object(3); break;
 	case Qt::Key_5: Object = OBJECT_SPHERE; Window->changed_object(4); break;
 	case Qt::Key_6: Object = OBJECT_PLY; break;
+	case Qt::Key_7: Object = OBJECT_CUSTOM; break;
 
 	case Qt::Key_P: toggle_point_mode(Draw_point ? Qt::Checked : Qt::Unchecked); Window->toggled_point_mode(Draw_point); break;
 	case Qt::Key_L: toggle_line_mode(Draw_line ? Qt::Checked : Qt::Unchecked); Window->toggled_line_mode(Draw_line); break;
@@ -132,12 +133,13 @@ void _gl_widget::draw_objects()
 
 		switch (Object)
 		{
-		case OBJECT_TETRAHEDRON: Tetrahedron.draw_point(); break;
-		case OBJECT_CUBE: Cube.draw_point(); break;
-		case OBJECT_CONE: Cone.draw_point(); break;
-		case OBJECT_CILINDER: Cilinder.draw_point(); break;
-		case OBJECT_SPHERE: Sphere.draw_point(); break;
-		case OBJECT_PLY: Ply.draw_point(); break;
+		case OBJECT_TETRAHEDRON: Tetrahedron.draw(MODE_DRAW_POINT); break;
+		case OBJECT_CUBE: Cube.draw(MODE_DRAW_POINT); break;
+		case OBJECT_CONE: Cone.draw(MODE_DRAW_POINT); break;
+		case OBJECT_CILINDER: Cilinder.draw(MODE_DRAW_POINT); break;
+		case OBJECT_SPHERE: Sphere.draw(MODE_DRAW_POINT); break;
+		case OBJECT_PLY: Ply.draw(MODE_DRAW_POINT); break;
+		case OBJECT_CUSTOM: Custom.draw(MODE_DRAW_POINT); break;
 		default: break;
 		}
 	}
@@ -149,12 +151,13 @@ void _gl_widget::draw_objects()
 
 		switch (Object)
 		{
-		case OBJECT_TETRAHEDRON: Tetrahedron.draw_line(); break;
-		case OBJECT_CUBE: Cube.draw_line(); break;
-		case OBJECT_CONE: Cone.draw_line(); break;
-		case OBJECT_CILINDER: Cilinder.draw_line(); break;
-		case OBJECT_SPHERE: Sphere.draw_line(); break;
-		case OBJECT_PLY: Ply.draw_line(); break;
+		case OBJECT_TETRAHEDRON: Tetrahedron.draw(MODE_DRAW_LINE); break;
+		case OBJECT_CUBE: Cube.draw(MODE_DRAW_LINE); break;
+		case OBJECT_CONE: Cone.draw(MODE_DRAW_LINE); break;
+		case OBJECT_CILINDER: Cilinder.draw(MODE_DRAW_LINE); break;
+		case OBJECT_SPHERE: Sphere.draw(MODE_DRAW_LINE); break;
+		case OBJECT_PLY: Ply.draw(MODE_DRAW_LINE); break;
+		case OBJECT_CUSTOM: Custom.draw(MODE_DRAW_LINE); break;
 		default: break;
 		}
 	}
@@ -165,12 +168,13 @@ void _gl_widget::draw_objects()
 
 		switch (Object)
 		{
-		case OBJECT_TETRAHEDRON: Tetrahedron.draw_fill(); break;
-		case OBJECT_CUBE: Cube.draw_fill(); break;
-		case OBJECT_CONE: Cone.draw_fill(); break;
-		case OBJECT_CILINDER: Cilinder.draw_fill(); break;
-		case OBJECT_SPHERE: Sphere.draw_fill(); break;
-		case OBJECT_PLY: Ply.draw_fill(); break;
+		case OBJECT_TETRAHEDRON: Tetrahedron.draw(MODE_DRAW_FILL); break;
+		case OBJECT_CUBE: Cube.draw(MODE_DRAW_FILL); break;
+		case OBJECT_CONE: Cone.draw(MODE_DRAW_FILL); break;
+		case OBJECT_CILINDER: Cilinder.draw(MODE_DRAW_FILL); break;
+		case OBJECT_SPHERE: Sphere.draw(MODE_DRAW_FILL); break;
+		case OBJECT_PLY: Ply.draw(MODE_DRAW_FILL); break;
+		case OBJECT_CUSTOM: Custom.draw(MODE_DRAW_FILL); break;
 		default: break;
 		}
 	}
@@ -179,12 +183,13 @@ void _gl_widget::draw_objects()
 	{
 		switch (Object)
 		{
-		case OBJECT_TETRAHEDRON: Tetrahedron.draw_chess(); break;
-		case OBJECT_CUBE: Cube.draw_chess(); break;
-		case OBJECT_CONE: Cone.draw_chess(); break;
-		case OBJECT_CILINDER: Cilinder.draw_chess(); break;
-		case OBJECT_SPHERE: Sphere.draw_chess(); break;
-		case OBJECT_PLY: Ply.draw_chess(); break;
+		case OBJECT_TETRAHEDRON: Tetrahedron.draw(MODE_DRAW_CHESS); break;
+		case OBJECT_CUBE: Cube.draw(MODE_DRAW_CHESS); break;
+		case OBJECT_CONE: Cone.draw(MODE_DRAW_CHESS); break;
+		case OBJECT_CILINDER: Cilinder.draw(MODE_DRAW_CHESS); break;
+		case OBJECT_SPHERE: Sphere.draw(MODE_DRAW_CHESS); break;
+		case OBJECT_PLY: Ply.draw(MODE_DRAW_CHESS); break;
+		case OBJECT_CUSTOM: Custom.draw(MODE_DRAW_CHESS); break;
 		default: break;
 		}
 	}

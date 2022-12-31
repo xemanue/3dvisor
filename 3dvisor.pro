@@ -1,9 +1,15 @@
 HEADERS += \
+  brazo.h \
+  cabina.h \
+  cable.h \
+  carga.h \
   cilinder.h \
   colors.h \
   basic_object3d.h \
   cone.h \
   cube.h \
+  gancho.h \
+  grua.h \
   object3d.h \
   axis.h \
   ply_object3d.h \
@@ -16,9 +22,15 @@ HEADERS += \
 SOURCES += \
   axis.cpp \
   basic_object3d.cpp \
+  brazo.cpp \
+  cabina.cpp \
+  cable.cpp \
+  carga.cpp \
   cilinder.cpp \
   cone.cpp \
   cube.cpp \
+  gancho.cpp \
+  grua.cpp \
   object3d.cpp \
   ply_object.cpp \
   rev_object3d.cpp \

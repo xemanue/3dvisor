@@ -54,9 +54,15 @@ OBJECTS_DIR   = ./
 
 SOURCES       = axis.cpp \
 		basic_object3d.cpp \
+		brazo.cpp \
+		cabina.cpp \
+		cable.cpp \
+		carga.cpp \
 		cilinder.cpp \
 		cone.cpp \
 		cube.cpp \
+		gancho.cpp \
+		grua.cpp \
 		object3d.cpp \
 		ply_object.cpp \
 		rev_object3d.cpp \
@@ -68,9 +74,15 @@ SOURCES       = axis.cpp \
 		moc_window.cpp
 OBJECTS       = axis.o \
 		basic_object3d.o \
+		brazo.o \
+		cabina.o \
+		cable.o \
+		carga.o \
 		cilinder.o \
 		cone.o \
 		cube.o \
+		gancho.o \
+		grua.o \
 		object3d.o \
 		ply_object.o \
 		rev_object3d.o \
@@ -292,11 +304,17 @@ DIST          = ../../Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.15.2/gcc_64/mkspecs/features/exceptions.prf \
 		../../Qt/5.15.2/gcc_64/mkspecs/features/yacc.prf \
 		../../Qt/5.15.2/gcc_64/mkspecs/features/lex.prf \
-		3dvisor.pro cilinder.h \
+		3dvisor.pro brazo.h \
+		cabina.h \
+		cable.h \
+		carga.h \
+		cilinder.h \
 		colors.h \
 		basic_object3d.h \
 		cone.h \
 		cube.h \
+		gancho.h \
+		grua.h \
 		object3d.h \
 		axis.h \
 		ply_object3d.h \
@@ -306,9 +324,15 @@ DIST          = ../../Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
 		glwidget.h \
 		window.h axis.cpp \
 		basic_object3d.cpp \
+		brazo.cpp \
+		cabina.cpp \
+		cable.cpp \
+		carga.cpp \
 		cilinder.cpp \
 		cone.cpp \
 		cube.cpp \
+		gancho.cpp \
+		grua.cpp \
 		object3d.cpp \
 		ply_object.cpp \
 		rev_object3d.cpp \
@@ -768,8 +792,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.15.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents cilinder.h colors.h basic_object3d.h cone.h cube.h object3d.h axis.h ply_object3d.h rev_object3d.h sphere.h tetrahedron.h glwidget.h window.h $(DISTDIR)/
-	$(COPY_FILE) --parents axis.cpp basic_object3d.cpp cilinder.cpp cone.cpp cube.cpp object3d.cpp ply_object.cpp rev_object3d.cpp sphere.cpp tetrahedron.cpp main.cpp glwidget.cpp window.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents brazo.h cabina.h cable.h carga.h cilinder.h colors.h basic_object3d.h cone.h cube.h gancho.h grua.h object3d.h axis.h ply_object3d.h rev_object3d.h sphere.h tetrahedron.h glwidget.h window.h $(DISTDIR)/
+	$(COPY_FILE) --parents axis.cpp basic_object3d.cpp brazo.cpp cabina.cpp cable.cpp carga.cpp cilinder.cpp cone.cpp cube.cpp gancho.cpp grua.cpp object3d.cpp ply_object.cpp rev_object3d.cpp sphere.cpp tetrahedron.cpp main.cpp glwidget.cpp window.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -927,7 +951,13 @@ moc_glwidget.cpp: glwidget.h \
 		cone.h \
 		rev_object3d.h \
 		cilinder.h \
+		sphere.h \
 		ply_object3d.h \
+		cabina.h \
+		brazo.h \
+		cable.h \
+		gancho.h \
+		carga.h \
 		moc_predefs.h \
 		../../Qt/5.15.2/gcc_64/bin/moc
 	/home/xema/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/xema/repos/3dvisor/moc_predefs.h -I/home/xema/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/xema/repos/3dvisor -I/home/xema/Qt/5.15.2/gcc_64/include -I/home/xema/Qt/5.15.2/gcc_64/include/QtWidgets -I/home/xema/Qt/5.15.2/gcc_64/include/QtGui -I/home/xema/Qt/5.15.2/gcc_64/include/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include glwidget.h -o moc_glwidget.cpp
@@ -1059,6 +1089,26 @@ moc_window.cpp: window.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qeventloop.h \
 		../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QCheckBox \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/QFileInfo \
 		moc_predefs.h \
 		../../Qt/5.15.2/gcc_64/bin/moc
 	/home/xema/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/xema/repos/3dvisor/moc_predefs.h -I/home/xema/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/xema/repos/3dvisor -I/home/xema/Qt/5.15.2/gcc_64/include -I/home/xema/Qt/5.15.2/gcc_64/include/QtWidgets -I/home/xema/Qt/5.15.2/gcc_64/include/QtGui -I/home/xema/Qt/5.15.2/gcc_64/include/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include window.h -o moc_window.cpp
@@ -1090,6 +1140,56 @@ basic_object3d.o: basic_object3d.cpp basic_object3d.h \
 		vertex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o basic_object3d.o basic_object3d.cpp
 
+brazo.o: brazo.cpp brazo.h \
+		cable.h \
+		gancho.h \
+		carga.h \
+		cube.h \
+		object3d.h \
+		basic_object3d.h \
+		colors.h \
+		vertex.h \
+		sphere.h \
+		rev_object3d.h \
+		cilinder.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o brazo.o brazo.cpp
+
+cabina.o: cabina.cpp cabina.h \
+		brazo.h \
+		cable.h \
+		gancho.h \
+		carga.h \
+		cube.h \
+		object3d.h \
+		basic_object3d.h \
+		colors.h \
+		vertex.h \
+		sphere.h \
+		rev_object3d.h \
+		cilinder.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cabina.o cabina.cpp
+
+cable.o: cable.cpp cable.h \
+		gancho.h \
+		carga.h \
+		cube.h \
+		object3d.h \
+		basic_object3d.h \
+		colors.h \
+		vertex.h \
+		sphere.h \
+		rev_object3d.h \
+		cilinder.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cable.o cable.cpp
+
+carga.o: carga.cpp carga.h \
+		cube.h \
+		object3d.h \
+		basic_object3d.h \
+		colors.h \
+		vertex.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o carga.o carga.cpp
+
 cilinder.o: cilinder.cpp cilinder.h \
 		rev_object3d.h \
 		object3d.h \
@@ -1112,6 +1212,33 @@ cube.o: cube.cpp cube.h \
 		colors.h \
 		vertex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cube.o cube.cpp
+
+gancho.o: gancho.cpp gancho.h \
+		carga.h \
+		cube.h \
+		object3d.h \
+		basic_object3d.h \
+		colors.h \
+		vertex.h \
+		sphere.h \
+		rev_object3d.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gancho.o gancho.cpp
+
+grua.o: grua.cpp grua.h \
+		cabina.h \
+		brazo.h \
+		cable.h \
+		gancho.h \
+		carga.h \
+		cube.h \
+		object3d.h \
+		basic_object3d.h \
+		colors.h \
+		vertex.h \
+		sphere.h \
+		rev_object3d.h \
+		cilinder.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o grua.o grua.cpp
 
 object3d.o: object3d.cpp object3d.h \
 		basic_object3d.h \
@@ -1279,7 +1406,27 @@ main.o: main.cpp ../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qgridlayout.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QMessageBox \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qmessagebox.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/QGuiApplication
+		../../Qt/5.15.2/gcc_64/include/QtGui/QGuiApplication \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QCheckBox \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/QFileInfo
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 glwidget.o: glwidget.cpp glwidget.h \
@@ -1405,7 +1552,13 @@ glwidget.o: glwidget.cpp glwidget.h \
 		cone.h \
 		rev_object3d.h \
 		cilinder.h \
+		sphere.h \
 		ply_object3d.h \
+		cabina.h \
+		brazo.h \
+		cable.h \
+		gancho.h \
+		carga.h \
 		window.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1430,7 +1583,27 @@ glwidget.o: glwidget.cpp glwidget.h \
 		../../Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qeventloop.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h
+		../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QCheckBox \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/QFileInfo
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o glwidget.o glwidget.cpp
 
 window.o: window.cpp ../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
@@ -1551,28 +1724,12 @@ window.o: window.cpp ../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenu.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QFrame \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qframe.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/QComboBox \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qcombobox.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qvalidator.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qregularexpression.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qslider.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyle.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qabstractitemmodel.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/QCheckBox \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qcheckbox.h \
-		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QLabel \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qlabel.h \
 		window.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/QStandardPaths \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qstandardpaths.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QFileDialog \
@@ -1589,6 +1746,25 @@ window.o: window.cpp ../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QMessageBox \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../Qt/5.15.2/gcc_64/include/QtGui/QGuiApplication \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/QCheckBox \
+		../../Qt/5.15.2/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/QFileInfo \
 		glwidget.h \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/QOpenGLWidget \
 		../../Qt/5.15.2/gcc_64/include/QtWidgets/qopenglwidget.h \
@@ -1610,7 +1786,13 @@ window.o: window.cpp ../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
 		cone.h \
 		rev_object3d.h \
 		cilinder.h \
-		ply_object3d.h
+		sphere.h \
+		ply_object3d.h \
+		cabina.h \
+		brazo.h \
+		cable.h \
+		gancho.h \
+		carga.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o window.o window.cpp
 
 moc_glwidget.o: moc_glwidget.cpp 

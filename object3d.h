@@ -12,6 +12,7 @@
 
 #include "basic_object3d.h"
 
+typedef enum {MODE_DRAW_POINT, MODE_DRAW_LINE, MODE_DRAW_FILL, MODE_DRAW_CHESS} _draw_mode;
 
 /*****************************************************************************//**
  *
@@ -21,13 +22,13 @@
 
 class _object3D:public _basic_object3D
 {
-  public:
-  vector<_vertex3ui> Triangles;
+	public:
+	vector<_vertex3ui> Triangles;
 
-  void draw_line();
-  void draw_fill();
-  void draw_chess() ;
-
+	void draw(_draw_mode modo, float r = 1, float g = 0.33, float b = 0.33);
+	void draw_line();
+	void draw_fill(float r, float g, float b);
+	void draw_chess();
 };
 
 #endif // OBJECT3D_H

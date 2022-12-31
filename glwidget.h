@@ -21,6 +21,7 @@
 #include "cilinder.h"
 #include "sphere.h"
 #include "ply_object3d.h"
+#include "grua.h"
 
 
 namespace _gl_widget_ne
@@ -34,8 +35,7 @@ const float X_MIN = -.1;
 	const float DEFAULT_DISTANCE = 2;
 	const float ANGLE_STEP = 1;
 
-	typedef enum {MODE_DRAW_POINT, MODE_DRAW_LINE, MODE_DRAW_FILL, MODE_DRAW_CHESS} _mode_draw;
-	typedef enum {OBJECT_TETRAHEDRON, OBJECT_CUBE, OBJECT_CONE, OBJECT_CILINDER, OBJECT_SPHERE, OBJECT_PLY} _object;
+	typedef enum {OBJECT_TETRAHEDRON, OBJECT_CUBE, OBJECT_CONE, OBJECT_CILINDER, OBJECT_SPHERE, OBJECT_PLY, OBJECT_CUSTOM} _object;
 }
 
 class _window;
@@ -88,6 +88,7 @@ private:
 	_cilinder Cilinder;
 	_sphere Sphere;
 	_ply_object Ply;
+	_grua Custom;
 
 	bool file_loaded = false;
 
