@@ -3,4 +3,4 @@
 
 Very simple OpenGL college project to visualize `.ply` files.
 
-Created using [QT](https://www.qt.io/), which is also needed to build.
+Created using [QT Creator](https://www.qt.io/product/development-tools), which is also needed to build.
