@@ -1,4 +1,4 @@
-# 3dvisor
+# OpenGL `.ply` visor
 **Repository created for archiving purposes, and thus unmaintained.**
 
 Very simple OpenGL college project to visualize `.ply` files.
