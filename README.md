@@ -1,5 +1,5 @@
 # 3dvisor
-**Repository created for archiving purposes.**
+**Repository created for archiving purposes, and thus unmaintained.**
 
 Very simple OpenGL college project to visualize `.ply` files.
 
